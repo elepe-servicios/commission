@@ -44,6 +44,8 @@ def _handle_settlement_line_commission_id(env):
 
 @openupgrade.migrate(no_version=True)
 def migrate(env, version):
+    if not openupgrade.table_exists(env.cr, "sale_commission"):
+        return
     openupgrade.rename_tables(env.cr, table_renames)
     openupgrade.rename_models(env.cr, model_renames)
     _handle_settlement_line_commission_id(env)
